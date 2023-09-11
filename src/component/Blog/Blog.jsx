@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { GoBookmark } from 'react-icons/go';
-const Blog = ({ blog, handleAddBookmark }) => {
-	const [isBookmarked, setIsBookmarked] = useState(false);
+const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
+	// const [isBookmarked, setIsBookmarked] = useState(false);
+	const [isRead, setIsRead] = useState(false);
 	const {
 		title,
 		cover,
@@ -31,10 +32,10 @@ const Blog = ({ blog, handleAddBookmark }) => {
 				<div className="flex items-center">
 					<span>{reading_time} min read</span>
 					<button
-						className={`ml-3 ${isBookmarked && 'text-amber-400'} `}
+						className={`ml-3  `}
 						onClick={() => {
 							handleAddBookmark(blog);
-							setIsBookmarked(!isBookmarked);
+							// setIsBookmarked(!isBookmarked);
 						}}
 					>
 						<GoBookmark />
@@ -49,6 +50,20 @@ const Blog = ({ blog, handleAddBookmark }) => {
 					</span>
 				))}
 			</p>
+			<div>
+				<button
+					disabled={isRead}
+					className={`${
+						isRead ? 'text-gray-300' : 'text-purple-600'
+					} underline font-bold`}
+					onClick={() => {
+						handleMarkAsRead(blog.reading_time, blog.id);
+						setIsRead(!isRead);
+					}}
+				>
+					Mark As Read
+				</button>
+			</div>
 		</div>
 	);
 };
@@ -56,5 +71,6 @@ const Blog = ({ blog, handleAddBookmark }) => {
 Blog.propTypes = {
 	blog: PropTypes.object.isRequired,
 	handleAddBookmark: PropTypes.func.isRequired,
+	handleMarkAsRead: PropTypes.func.isRequired,
 };
 export default Blog;
