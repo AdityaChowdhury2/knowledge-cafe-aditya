@@ -18,7 +18,7 @@ function App() {
 	return (
 		<>
 			<Header />
-			<main className="container md:flex px-4">
+			<main className="container md:flex px-4 gap-6">
 				<Blogs handleAddBookmark={handleAddBookmark} />
 				<Bookmarks bookmarks={bookmarks} />
 			</main>
