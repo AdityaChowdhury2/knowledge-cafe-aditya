@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { GoBookmark } from 'react-icons/go';
 const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
-	// const [isBookmarked, setIsBookmarked] = useState(false);
+	const [isBookmarked, setIsBookmarked] = useState(false);
 	const [isRead, setIsRead] = useState(false);
 	const {
 		title,
@@ -13,6 +13,7 @@ const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
 		posted_date,
 		hashtags,
 	} = blog;
+
 	return (
 		<div className="border-b-2 py-8">
 			<div>
@@ -32,10 +33,10 @@ const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
 				<div className="flex items-center">
 					<span>{reading_time} min read</span>
 					<button
-						className={`ml-3  `}
+						className={`ml-3  ${isBookmarked ? 'text-amber-400' : ''} `}
 						onClick={() => {
 							handleAddBookmark(blog);
-							// setIsBookmarked(!isBookmarked);
+							setIsBookmarked(!isBookmarked);
 						}}
 					>
 						<GoBookmark />
@@ -59,6 +60,7 @@ const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
 					onClick={() => {
 						handleMarkAsRead(blog.reading_time, blog.id);
 						setIsRead(!isRead);
+						!isRead && setIsBookmarked(false);
 					}}
 				>
 					Mark As Read
