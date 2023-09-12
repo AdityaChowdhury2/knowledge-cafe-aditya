@@ -33,6 +33,7 @@ const Blog = ({ blog, handleAddBookmark, handleMarkAsRead }) => {
 				<div className="flex items-center">
 					<span>{reading_time} min read</span>
 					<button
+						disabled={isRead}
 						className={`ml-3  ${isBookmarked ? 'text-amber-400' : ''} `}
 						onClick={() => {
 							handleAddBookmark(blog);
